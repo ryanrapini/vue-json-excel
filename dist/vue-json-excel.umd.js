@@ -249,6 +249,11 @@
 	      type: Boolean,
 	      default: false,
 	    },
+	    // long number stringify
+	    showFields: {
+	      type: Boolean,
+	      default: true,
+	    },
 	  },
 	  computed: {
 	    // unique identifier
@@ -328,11 +333,13 @@
 	      }
 
 	      //Fields
+	      if(this.showFields){
 	      xlsData += "<tr>";
 	      for (let key in data[0]) {
 	        xlsData += "<th>" + key + "</th>";
 	      }
 	      xlsData += "</tr>";
+	      }
 	      xlsData += "</thead>";
 
 	      //Data
@@ -381,12 +388,14 @@
 	      }
 
 	      //Fields
+	      if(this.showFields){
 	      for (let key in data[0]) {
 	        csvData.push(key);
 	        csvData.push(",");
 	      }
 	      csvData.pop();
 	      csvData.push("\r\n");
+	      }
 	      //Data
 	      data.map(function (item) {
 	        for (let key in item) {
@@ -623,7 +632,11 @@
 	  return _c(
 	    "div",
 	    { attrs: { id: _vm.idName }, on: { click: _vm.generate } },
-	    [_vm._t("default", [_vm._v(" Download " + _vm._s(_vm.name) + " ")])],
+	    [
+	      _vm._t("default", function() {
+	        return [_vm._v(" Download " + _vm._s(_vm.name) + " ")]
+	      })
+	    ],
 	    2
 	  )
 	};
